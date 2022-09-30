@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="zxx">
+<html lang="es">
 
 <head>
 	<!-- Required meta tags -->
@@ -7,9 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Title -->
 	<title>PremierPluss</title>
-	<!-- Google Fonts -->
-	<link href="../../css2?family=Dosis:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-	<link href="../../css2-1?family=Catamaran:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	<!-- Favicon -->
 	<link rel="icon" type="image/ico" href="assets/img/favicon.ico">
 	<!-- Bootstrap Min CSS -->
@@ -20,6 +17,8 @@
 	<link rel="stylesheet" href="assets/css/flaticon.css">
 	<!-- Font Awesome Min CSS -->
 	<script src="https://kit.fontawesome.com/68e6b493ee.js" crossorigin="anonymous"></script>
+	<!-- Sweet Alert 2 -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<!-- Mran Menu CSS -->
 	<link rel="stylesheet" href="assets/css/meanmenu.css">
 	<!-- Magnific Popup Min CSS -->
@@ -54,8 +53,8 @@
 				<div class="techvio-responsive-menu">
 					<div class="logo">
 						<a href="index.html">
-							<img src="assets/img/home-font.png" class="white-logo" alt="logo" width="125">
-							<img src="assets/img/home-font.png" class="black-logo" alt="logo" width="125">
+							<img src="assets/img/home-font.png" class="white-logo" alt="logo" width="50">
+							<img src="assets/img/home-font.png" class="black-logo" alt="logo" width="50">
 						</a>
 					</div>
 				</div>
@@ -71,20 +70,20 @@
 					<div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
 						<ul class="navbar-nav">
 							<li class="nav-item"> 
-								<a href="javascript:void(0);" class="nav-link">Inicio</a>
+								<a href="javascript:void(0);" id="iniciolink" class="nav-link">Inicio</a>
 							</li>
 							<li class="nav-item">
-								<a href="javascript:void(0);" class="nav-link">Recursos</a>
+								<a href="javascript:void(0);" id="recursoslink" class="nav-link">Recursos</a>
 							</li>
 							<li class="nav-item">
-								<a href="javascript:void(0);" class="nav-link">Contacto</a>
+								<a href="javascript:void(0);" id="contactolink" class="nav-link">Contacto</a>
 							</li>
 							<li class="nav-item">
 								<a href="https://loteria.premierpluss.com/" class="nav-link" target="_blank" rel="noopener noreferrer">Sistema Administrativo</a>
 							</li>
 						</ul>
 						<div class="other-option">
-							<a class="default-btn" href="mailto:demo@example.com">Contactar a soporte <span></span></a>
+							<a class="default-btn" href="mailto:lagranjitaonlinecontacto@gmail.com">Contactar a soporte <span></span></a>
 						</div>
 					</div>
 				</nav>
@@ -94,7 +93,7 @@
 	<!-- End Navbar Area -->
 	
 	<!-- Start Home Area -->
-	<div class="home-area">
+	<div class="home-area" id="inicio">
 		<div class="d-table">
 			<div class="d-table-cell">
 				<div class="container">
@@ -102,7 +101,7 @@
 						<div class="col-lg-6 col-md-12">
 							<div class="main-banner-content">
 								<h1>Premier Pluss</h1>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, magna aliqua. ipsum is simply dummy text of the printing.</p>
+								<p>El mejor sistema de ventas de animalitos y loterias de toda Venezuela.</p>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-12">
@@ -121,7 +120,7 @@
 	<!-- End Home Area -->
 	
 	<!-- Start Services Section -->
-	<section class="services-section section-padding">
+	<section class="services-section section-padding" id="recursos">
 		<div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -187,7 +186,7 @@
 						<h3>Any Desk</h3>
 						<p>Programa para asistencia remota <br><br></p>
 						<div class="services-btn-link">
-							<a href="#" class="services-link">Descargar <i class="fa-solid fa-download"></i></a>
+							<a href="https://download.anydesk.com/AnyDesk.exe" download="download" class="services-link">Descargar <i class="fa-solid fa-download"></i></a>
 						</div>
 					</div>
 				</div>
@@ -209,7 +208,7 @@
 	<!-- End Services Section -->
 
 	<!-- Start About Section -->
-	<section class="services-section section-padding">
+	<section class="services-section section-padding" id="contacto">
 		<div class="container">
 			<div class="row">
 				<div class="contact-section bg-grey section-padding">
