@@ -1,49 +1,33 @@
 // Ajax mail js
 $(function() {
-
-	// Get the form.
-	var form = $('#contact-form');
-
-	// Get the messages div.
-	var formMessages = $('.form-message');
-
-	// Set up an event listener for the contact form.
-	$(form).submit(function(e) {
-		// Stop the browser from submitting the form.
-		e.preventDefault();
-
-		// Serialize the form data.
-		var formData = $(form).serialize();
-
-		// Submit the form using AJAX.
-		$.ajax({
-			type: 'POST',
-			url: $(form).attr('action'),
-			data: formData
-		})
-		.done(function(response) {
-			// Make sure that the formMessages div has the 'success' class.
-			$(formMessages).removeClass('error');
-			$(formMessages).addClass('success');
-
-			// Set the message text.
-			$(formMessages).text(response);
-
-			// Clear the form.
-			$('#contact-form input,#contact-form textarea').val('');
-		})
-		.fail(function(data) {
-			// Make sure that the formMessages div has the 'error' class.
-			$(formMessages).removeClass('success');
-			$(formMessages).addClass('error');
-
-			// Set the message text.
-			if (data.responseText !== '') {
-				$(formMessages).text(data.responseText);
-			} else {
-				$(formMessages).text('Oops! An error occured and your message could not be sent.');
-			}
-		});
-	});
-
-});
+	$( '#sendMailForm' ).submit(function ( e ) {
+    var data = {
+        'name': $('#name').val(),
+        'cirif': $('#cirif').val(),
+        'phone': $('#phone').val(),
+        'email' : $('#email').val(),
+        'message' : $('#message').val()
+    };
+    // POST data to the php file
+    $.ajax({ 
+        url: '_mail.php', 
+        data: data,
+        type: 'POST',
+        success: function (data) {
+			// For Notification
+            document.getElementById("sendMailForm").reset();
+            var $alertDiv = $(".mailResponse");
+            $alertDiv.show();
+            $alertDiv.find('.alert').removeClass('alert-danger alert-success');
+            $alertDiv.find('.mailResponseText').text("");
+            if(data.error){
+                $alertDiv.find('.alert').addClass('alert-danger');
+                $alertDiv.find('.mailResponseText').text(data.message);
+            }else{
+                $alertDiv.find('.alert').addClass('alert-success');
+                $alertDiv.find('.mailResponseText').text(data.message);
+            }
+        }
+    });
+    e.preventDefault();
+});});
