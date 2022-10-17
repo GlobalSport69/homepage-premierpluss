@@ -1,35 +1,34 @@
 <?php
-   // data sent in header are in JSON format
-   header('Content-Type: application/json');
-   // takes the value from variables and Post the data
-   $name = $_POST['name'];
-   $cirif = $_POST['cirif'];
-   $phone = $_POST['phone'];
-   $email = $_POST['email'];  
-   $message = $_POST['message'];  
-   $to = "pablo.marcano.16@gmail.com";
-   $subject = "Contact Us";
-   // Email Template
-   $message = "<b>Name : </b>". $name ."<br>";
-   $message .= "<b>Email : </b>".$cirif."<br>";
-   $message .= "<b>Phone : </b>".$phone."<br>";
-   $message .= "<b>Email : </b>".$email."<br>";
-   $message .= "<b>Message : </b>".$message."<br>";
+   $json = file_get_contents('php://input');
+   $data = json_decode($json);
 
-   $header = "From:"+$email+" \r\n";
-   $header .= "MIME-Version: 1.0\r\n";
-   $header .= "Content-type: text/html\r\n";
-   $retval = mail ($to,$subject,$message,$header);
-   // message Notification
-   if( $retval == true ) {
-      echo json_encode(array(
-         'success'=> true,
-         'message' => 'Message sent successfully'
-      ));
-   }else {
-      echo json_encode(array(
-         'error'=> true,
-         'message' => 'Error sending message'
-      ));
+   if(isset($data)){
+      
+      require_once 'vendor/autoload.php';
+      $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, 'ssl'))
+         ->setUsername('smtpglobalsport69@gmail.com')
+         ->setPassword('ixwsclvccdyerngs')
+      ;
+      
+      // Create the Mailer using your created Transport
+      $mailer = new Swift_Mailer($transport);
+      // Create a message
+      $template = '<div style="background-color: #07213a; color: white; width: 50%; height: 600px; margin: 0px auto; padding: 12px 16px; border-radius: 5%;">';
+      $template .= '  <h1 style="text-align: center;"><span style=" font-size: 50px; font-weight: bold; color: aqua;">C</span>ontacto</h1>';
+      $template .= '  <h2 style="text-align: left;"><span style="font-size: 30px; font-weight: bold; color: aqua;">N</span>ombre & Apellido / Compañia</h2>';
+      $template .= '  <p style="text-align: justify; font-size: 18px;">'. $data->name .'</p>';
+      $template .= '  <h2 style="text-align: left;"><span style="font-size: 30px; font-weight: bold; color: aqua;">C</span>orreo Electronico</h2>';
+      $template .= '  <p style="text-align: justify; font-size: 18px; text-decoration: none">'. $data->email .'</p>';
+      $template .= '  <h2 style="text-align: left;"><span style="font-size: 30px; font-weight: bold; color: aqua;">M</span>ensaje</h2>';
+      $template .= '  <p style="text-align: justify; font-size: 18px;">'. $data->message .'</p>';
+      $template .= '</div>';
+      // Create a message
+      $message = (new Swift_Message('Contacto desde LaGranjitaOnLine'))
+      ->setFrom([$data->email => $data->name])
+      ->setTo(['pablo.marcano.16@gmail.com' => 'Soporte LaGranjitaOnLine'])
+      ->setBody($template, 'text/html')
+      ;
+      // Send the message
+      $result = $mailer->send($message);
    }
 ?>

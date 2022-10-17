@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  apache2:
+    ports:
+      - '8080:80'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - internal
+    volumes:
+      - './:/var/www/html'
+networks:
+  internal:
+    driver: bridge
